@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TryAgainCoreDataApp: App {
+    
+    @StateObject var todoManager = ToDoListManager()
+    @State var isPresented = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ToDoListView(todoManager: todoManager)
         }
     }
 }
