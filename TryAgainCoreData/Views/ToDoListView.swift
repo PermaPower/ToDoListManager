@@ -20,7 +20,7 @@ struct ToDoListView: View {
                 ForEach(todoManager.items) { item in
                     NavigationLink(
                         destination:
-                            ToDoListDetailView(todoManager: todoManager, itemName: item.name ?? "Missing Name"),
+                            ToDoListDetailView(todoManager: todoManager, item: item, itemName: item.name ?? "Missing Name"),
                         label: {
                             Button(item.name ?? "Name Missing") {
                                        showingSheet.toggle()

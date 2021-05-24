@@ -57,6 +57,7 @@ class ToDoListManager: ObservableObject {
             try container.viewContext.save()
             fetchData()
         } catch let error {
+            container.viewContext.rollback()
             print ("Error saving Core Data \(error.localizedDescription)")
         }
     }
@@ -76,12 +77,9 @@ class ToDoListManager: ObservableObject {
     }
     
     func update(item: ItemEntity, itemName: String) {
-        
-        let currentID = item.id ?? UUID()
         item.name = itemName
-        item.id = currentID
         saveData()
-        }
+    }
     
     static func emptyState() -> ToDoListManager {
         let manager = ToDoListManager()
