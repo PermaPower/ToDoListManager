@@ -12,18 +12,17 @@ struct ToDoListDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var todoManager: ToDoListManager
 
-        
-    @State var item: Item
+    @State var itemName: String
     
     var body: some View {
         
         VStack {
-        TextField("Name", text: $item.name)
+        TextField("Name", text: $itemName)
             .padding()
             .background(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                     
         Button(action: {
-            todoManager.update(name: item.name, item: item)
+            todoManager.update(item: ItemEntity.init(context: todoManager.container.viewContext), itemName: itemName)
             presentationMode.wrappedValue.dismiss()
         }, label: {
             Text("Update")
@@ -39,7 +38,7 @@ struct ToDoListDetailView_Previews: PreviewProvider {
     @ObservedObject var todoManager: ToDoListManager
 
     static var previews: some View {
-        
-        ToDoListDetailView(todoManager: ToDoListManager(), item: Item(id: UUID(), name: "TEST"))
+
+        ToDoListDetailView(todoManager: ToDoListManager(), itemName: "TEST")
     }
 }

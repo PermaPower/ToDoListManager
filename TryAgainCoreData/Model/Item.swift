@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Item: Identifiable {
-    var id: UUID
-    var name: String
-}
+//struct Item: Identifiable {
+//    var id: UUID
+//    var name: String
+//}

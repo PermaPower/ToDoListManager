@@ -20,9 +20,9 @@ struct ToDoListView: View {
                 ForEach(todoManager.items) { item in
                     NavigationLink(
                         destination:
-                            ToDoListDetailView(todoManager: todoManager, item: item),
+                            ToDoListDetailView(todoManager: todoManager, itemName: item.name ?? "Missing Name"),
                         label: {
-                            Button(item.name) {
+                            Button(item.name ?? "Name Missing") {
                                        showingSheet.toggle()
                                    }
                                    
@@ -31,9 +31,6 @@ struct ToDoListView: View {
                 }
                 .onDelete(perform: { indexSet in
                     todoManager.delete(at: indexSet)
-                })
-                .onMove(perform: { indices, newOffset in
-                    todoManager.move(indices: indices, newOffset: newOffset)
                 })
             }.navigationBarTitle(Text("ToDo's"), displayMode: .large)
             .toolbar(content: {
@@ -58,7 +55,10 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ToDoListView(todoManager: ToDoListManager.fullState())
+                .previewDisplayName("fullstate")
+            
             ToDoListView(todoManager: ToDoListManager.emptyState())
+                .previewDisplayName("emptyState")
         }
     }
 }
